@@ -1,1 +1,1 @@
-# slim-api-microservice
+# slim-microservice

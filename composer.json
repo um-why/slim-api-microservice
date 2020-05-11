@@ -1,0 +1,26 @@
+{
+    "require": {
+        "catfan/medoo": "^1.7",
+        "nyholm/psr7": "^1.2",
+        "nyholm/psr7-server": "^0.4.1",
+        "slim/slim": "^4.0",
+        "symfony/dotenv": "^5.0"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\": "api/",
+            "Support\\": "support/",
+            "Console\\": "console/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ]
+    }
+}
