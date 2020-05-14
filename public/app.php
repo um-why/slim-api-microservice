@@ -1,6 +1,5 @@
 <?php
 
-use DI\ContainerBuilder;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -13,7 +12,7 @@ unset($dotenv);
 $_ENV = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'app.php';
 $_ENV['route'] = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'route.php';
 
-$containerBuilder = new ContainerBuilder();
+$containerBuilder = new DI\ContainerBuilder();
 if ($_ENV['debug'] == false) {
     $containerBuilder->enableCompilation(ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'cache');
 }
@@ -23,7 +22,7 @@ $containerBuilder->addDefinitions([
         $processor = new Monolog\Processor\UidProcessor();
         $logger->pushProcessor($processor);
         $handler = new Monolog\Handler\StreamHandler(
-            ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'logs'
+            ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'app.log'
         );
         $logger->pushHandler($handler);
         return $logger;
