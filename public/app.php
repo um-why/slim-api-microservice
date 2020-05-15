@@ -19,12 +19,15 @@ if ($_ENV['debug'] == false) {
 $containerBuilder->addDefinitions([
     Psr\Log\LoggerInterface::class => function (Psr\Container\ContainerInterface $c) {
         $logger = new Monolog\Logger($_ENV['app_id']);
+
         $processor = new Monolog\Processor\UidProcessor();
         $logger->pushProcessor($processor);
+
         $handler = new Monolog\Handler\StreamHandler(
             ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'logs' . DIRECTORY_SEPARATOR . 'app.log'
         );
         $logger->pushHandler($handler);
+
         return $logger;
     },
 ]);
@@ -48,10 +51,6 @@ $app->get('/', function (Request $request, Response $response, $args) {
     return $response;
 });
 
-$app->get('/demo', function (Request $request, Response $response, $args) {
-    $response->getBody()->write('test');
-
-    return $response;
-});
+$app->get('/demo', 'Api\Controllers\DemoController:index');
 
 return $app;

@@ -50,8 +50,6 @@ class CheckSecurity
         }
         unset($route, $params);
 
-        $request = $request->withAttribute('level', $route['level']);
-
         return $response;
     }
 }
