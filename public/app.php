@@ -3,10 +3,9 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
-use Symfony\Component\Dotenv\Dotenv;
 
 // 载入配置信息
-$dotenv = new Dotenv();
+$dotenv = new Symfony\Component\Dotenv\Dotenv();
 $dotenv->load(ROOT_PATH . '.env');
 unset($dotenv);
 $_ENV = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'app.php';
@@ -17,7 +16,7 @@ if ($_ENV['debug'] == false) {
     $containerBuilder->enableCompilation(ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'cache');
 }
 $containerBuilder->addDefinitions([
-    Psr\Log\LoggerInterface::class => function (Psr\Container\ContainerInterface $c) {
+    Psr\Log\LoggerInterface::class => function () {
         $logger = new Monolog\Logger($_ENV['app_id']);
 
         $processor = new Monolog\Processor\UidProcessor();
