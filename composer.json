@@ -8,7 +8,9 @@
         "slim-4",
         "microservice",
         "micro-framework",
-        "api-server"
+        "api-server",
+        "rabbitmq",
+        "hprose"
     ],
     "homepage": "https://github.com/um-why/slim-microservice",
     "license": "MIT",

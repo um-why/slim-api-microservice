@@ -8,5 +8,6 @@ return [
     //     'auth'   => AUTHORIZED-USERS, // 授权用户列表，不同用户以 ',' 号分割
     // ],
 
-    1 => ['url' => 'demo', 'method' => 'GET', 'level' => 2, 'auth' => 'user1,user2'],
+    1 => ['url' => 'demo', 'method' => 'POST', 'level' => 3, 'auth' => 'user1,user2'],
+    2 => ['url' => 'test/cesi-demo', 'method' => 'POST', 'level' => 3, 'auth' => 'user1,user2'],
 ];
