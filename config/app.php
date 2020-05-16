@@ -18,12 +18,26 @@ return [
     ],
     'redis' => [
         'parameters' => [
-            'host' => isset($_ENV['REDIS_HOST']) ? $_ENV['REDIS_HOST'] : '',
-            'port' => isset($_ENV['REDIS_PORT']) ? $_ENV['REDIS_PORT'] : '',
+            'host' => isset($_ENV['REDIS_HOST']) ? $_ENV['REDIS_HOST'] : '127.0.0.1',
+            'port' => isset($_ENV['REDIS_PORT']) ? $_ENV['REDIS_PORT'] : 6379,
         ],
         'options' => [
             'password' => isset($_ENV['REDIS_PASSWORD']) ? $_ENV['REDIS_PASSWORD'] : '',
         ],
+    ],
+    'rabbitmq' => [
+        'host' => isset($_ENV['MQ_HOST']) ? $_ENV['MQ_HOST'] : 'localhost',
+        'port' => isset($_ENV['MQ_PORT']) ? $_ENV['MQ_PORT'] : 5672,
+        'user' => isset($_ENV['MQ_USER']) ? $_ENV['MQ_USER'] : 'test',
+        'password' => isset($_ENV['MQ_PASSWORD']) ? $_ENV['MQ_PASSWORD'] : '123456',
+        'vhost' => isset($_ENV['MQ_VHOST']) ? $_ENV['MQ_VHOST'] : '/',
+
+        'exchange' => isset($_ENV['MQ_EXCHANGE']) ? $_ENV['MQ_EXCHANGE'] : 'amq.topic',
+        'exchange_type' => isset($_ENV['MQ_EXCHANGE_TYPE']) ? $_ENV['MQ_EXCHANGE_TYPE'] : 'topic',
+
+        'queue' => isset($_ENV['MQ_QUEUE']) ? $_ENV['MQ_QUEUE'] : 'default',
+        'queue_arguments' => ['x-ha-policy' => ['S', 'all']],
+
     ],
 
     // 接口授权用户列表
