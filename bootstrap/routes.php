@@ -4,6 +4,10 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 
+$_ENV['service'] = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'service.php';
+
+$_ENV['restful'] = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'restful.php';
+
 return function (App $app) {
     $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('hello world');
