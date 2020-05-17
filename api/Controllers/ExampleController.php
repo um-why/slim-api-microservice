@@ -4,6 +4,7 @@ namespace Api\Controllers;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
+use Support\Engine\Medoo;
 
 // use Support\Engine\RabbitMQ;
 
@@ -19,6 +20,9 @@ class ExampleController
     public function index(Request $request, Response $response, array $args = [])
     {
         $this->logger->info('/demo', $request->getQueryParams());
+
+        $listRs = Medoo::getInstance()->select('migrations', '*');
+        var_dump($listRs);
 
         // RabbitMQ::publish('123', '234', []);
 
