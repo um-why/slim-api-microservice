@@ -25,6 +25,7 @@
         "php-amqplib/php-amqplib": "^2.11",
         "php-di/php-di": "^6.1",
         "slim/slim": "^4.0",
+        "symfony/console": "^5.0",
         "symfony/dotenv": "^5.0"
     },
     "config": {

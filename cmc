@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+date_default_timezone_set('Asia/Shanghai');
+define("ROOT_PATH", __DIR__ . DIRECTORY_SEPARATOR);
+require ROOT_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+use Symfony\Component\Console\Application;
+
+// 载入配置信息
+require_once ROOT_PATH . 'bootstrap' . DIRECTORY_SEPARATOR . 'settings.php';
+
+$app = new Application('Command Management Console', '1.0');
+
+$dispatch = require ROOT_PATH . 'console' . DIRECTORY_SEPARATOR . 'dispatch.php';
+$dispatch($app);
+
+$app->run();
