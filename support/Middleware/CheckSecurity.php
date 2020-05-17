@@ -13,7 +13,7 @@ class CheckSecurity
     {
         $response = $handler->handle($request);
 
-        $route = Helper::getRoute($request);
+        $route = Helper::getServiceRoute($request);
         if (!isset($route['level'])) {
             $response = new Response();
             $response = $response->withStatus(412);

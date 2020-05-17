@@ -13,7 +13,7 @@ class CheckRoute
         $response = $handler->handle($request);
 
         // 使用route.php文件定义的URL和METHOD方法，确保请求的有效性
-        $route = Helper::getRoute($request);
+        $route = Helper::getServiceRoute($request);
         if (!isset($route['id'])) {
             $response = new Response();
             $response = $response->withStatus(404);

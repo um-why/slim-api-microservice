@@ -11,7 +11,7 @@ unset($dotenv);
 $_ENV = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'app.php';
 $_ENV['service'] = require_once ROOT_PATH . 'config' . DIRECTORY_SEPARATOR . 'service.php';
 
-// 注入monolog服务
+// 依赖注入，monolog服务
 $containerBuilder = new DI\ContainerBuilder();
 if ($_ENV['debug'] == false) {
     $containerBuilder->enableCompilation(ROOT_PATH . 'storage' . DIRECTORY_SEPARATOR . 'cache');
@@ -38,12 +38,7 @@ $app = AppFactory::create();
 // $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
-// 请求安全验证
-$app->add(new Support\Middleware\CheckSecurity());
-$app->add(new Support\Middleware\CheckAuth());
-$app->add(new Support\Middleware\CheckTime());
-$app->add(new Support\Middleware\CheckRoute());
-$app->add(new Support\Middleware\CheckRoute());
+// 通用中间件
 $app->add(new Support\Middleware\ProcessParamsSpecial());
 
 $app->get('/', function (Request $request, Response $response, $args) {
@@ -54,6 +49,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
 // $app->get('/demo', 'Api\Controllers\DemoController:index');
 
+// 服务接口实现
 foreach ($_ENV['service'] as $k => $v) {
     if (!isset($v['method']) || !isset($v['url'])) {
         continue;
@@ -91,12 +87,13 @@ foreach ($_ENV['service'] as $k => $v) {
                 var_dump($e->getMessage(), $e->getCode());
                 exit;
             }
-            $response->getBody()->write(Support\Engine\Helper::returnSuccessMsg(
-                $result
-            ));
+            $response->getBody()->write(Support\Engine\Helper::returnSuccessMsg($result));
             return $response->withHeader('Content-Type', 'application/json');
         }
-    );
+    )->add(new Support\Middleware\CheckSecurity())
+        ->add(new Support\Middleware\CheckAuth())
+        ->add(new Support\Middleware\CheckTime())
+        ->add(new Support\Middleware\CheckRoute());
 }
 
 return $app;

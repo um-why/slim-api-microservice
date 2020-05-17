@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class Helper
 {
-    public static function getRoute(Request $request): array
+    public static function getServiceRoute(Request $request): array
     {
         $uriPath = $request->getUri()->getPath();
         $uriPath = ltrim($uriPath, '/');

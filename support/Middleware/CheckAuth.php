@@ -12,7 +12,7 @@ class CheckAuth
     {
         $response = $handler->handle($request);
 
-        $route = Helper::getRoute($request);
+        $route = Helper::getServiceRoute($request);
         if (!isset($route['auth'])) {
             $response = new Response();
             $response = $response->withStatus(403);
