@@ -88,10 +88,10 @@ class RabbitMQ
             $rabbitMq->channel->basic_consume(
                 $queue,
                 isset($config['consumer_tag']) && !empty($config['consumer_tag']) ? $config['consumer_tag'] : '',
-                isset($config['consumer_no_local']) && $config['consumer_no_local'] === true ? ture : false,
-                isset($config['consumer_no_ack']) && $config['consumer_no_ack'] === true ? ture : false,
-                isset($config['consumer_exclusive']) && $config['consumer_exclusive'] === true ? ture : false,
-                isset($config['consumer_nowait']) && $config['consumer_nowait'] === true ? ture : false,
+                isset($config['consumer_no_local']) && $config['consumer_no_local'] === true ? true : false,
+                isset($config['consumer_no_ack']) && $config['consumer_no_ack'] === true ? true : false,
+                isset($config['consumer_exclusive']) && $config['consumer_exclusive'] === true ? true : false,
+                isset($config['consumer_nowait']) && $config['consumer_nowait'] === true ? true : false,
                 function ($message) use ($callback, $rabbitMq) {
                     $callback($message, $rabbitMq);
                 },
@@ -144,22 +144,22 @@ class RabbitMQ
         $this->channel->exchange_declare(
             $config['exchange'],
             $config['exchange_type'],
-            isset($config['exchange_passive']) && $config['exchange_passive'] === true ? ture : false,
-            isset($config['exchange_durable']) && $config['exchange_durable'] === true ? ture : false,
-            isset($config['exchange_auto_delete']) && $config['exchange_auto_delete'] === false ? false : ture,
-            isset($config['exchange_internal']) && $config['exchange_internal'] === true ? ture : false,
-            isset($config['exchange_nowait']) && $config['exchange_nowait'] === true ? ture : false,
+            isset($config['exchange_passive']) && $config['exchange_passive'] === true ? true : false,
+            isset($config['exchange_durable']) && $config['exchange_durable'] === true ? true : false,
+            isset($config['exchange_auto_delete']) && $config['exchange_auto_delete'] === false ? false : true,
+            isset($config['exchange_internal']) && $config['exchange_internal'] === true ? true : false,
+            isset($config['exchange_nowait']) && $config['exchange_nowait'] === true ? true : false,
             isset($config['exchange_arguments']) && !empty($config['exchange_arguments']) ? $config['exchange_arguments'] : [],
             isset($config['exchange_ticket']) ? $config['exchange_ticket'] : null,
         );
 
         $this->queueInfo = $this->channel->queue_declare(
             $config['queue'],
-            isset($config['queue_passive']) && $config['queue_passive'] === true ? ture : false,
-            isset($config['queue_durable']) && $config['queue_durable'] === true ? ture : false,
-            isset($config['queue_exclusive']) && $config['queue_exclusive'] === true ? ture : false,
-            isset($config['queue_auto_delete']) && $config['queue_auto_delete'] === false ? false : ture,
-            isset($config['queue_nowait']) && $config['queue_nowait'] === true ? ture : false,
+            isset($config['queue_passive']) && $config['queue_passive'] === true ? true : false,
+            isset($config['queue_durable']) && $config['queue_durable'] === true ? true : false,
+            isset($config['queue_exclusive']) && $config['queue_exclusive'] === true ? true : false,
+            isset($config['queue_auto_delete']) && $config['queue_auto_delete'] === false ? false : true,
+            isset($config['queue_nowait']) && $config['queue_nowait'] === true ? true : false,
             isset($config['queue_arguments']) && !empty($config['queue_arguments']) ? $config['queue_arguments'] : [],
             isset($config['queue_ticket']) ? $config['queue_ticket'] : null,
         );
