@@ -17,7 +17,7 @@ class ExampleController
         $this->logger = $logger;
     }
 
-    public function index(Request $request, Response $response, array $args = [])
+    public function index(Request $request, Response $response)
     {
         $this->logger->info('/demo', $request->getQueryParams());
 
@@ -27,6 +27,27 @@ class ExampleController
         // RabbitMQ::publish('123', '234', []);
 
         $response->getBody()->write('api demo');
+
+        return $response;
+    }
+
+    public function name(Request $request, Response $response, array $args = [])
+    {
+        $response->getBody()->write('hello ' . $args['name']);
+
+        return $response;
+    }
+
+    public function user(Request $request, Response $response, array $args = [])
+    {
+        $response->getBody()->write('user is: ' . json_encode($args));
+
+        return $response;
+    }
+
+    public function id(Request $request, Response $response, array $args = [])
+    {
+        $response->getBody()->write('id is: ' . $args['id']);
 
         return $response;
     }

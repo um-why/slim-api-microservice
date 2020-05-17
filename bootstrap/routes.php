@@ -5,17 +5,21 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 
 return function (App $app) {
-    $app->options('/{routes:.*}', function (Request $request, Response $response) {
-        // CORS Pre-Flight OPTIONS Request Handler
-        return $response;
-    });
-
     $app->get('/', function (Request $request, Response $response) {
         $response->getBody()->write('hello world');
         return $response;
     });
 
-    $app->get('/demo', 'Api\Controllers\ExampleController:index');
+    // API接口定义
+    foreach ($_ENV['restful'] as $v) {
+        if (!isset($v[0]) || !isset($v[1]) ||
+            !isset($v[2]) || isset($v[3])
+        ) {
+            continue;
+        }
+
+        $app->map([$v[0]], $v[1], $v[2]);
+    }
 
     // 服务接口实现
     foreach ($_ENV['service'] as $k => $v) {
