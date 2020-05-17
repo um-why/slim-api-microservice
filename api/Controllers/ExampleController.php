@@ -4,11 +4,13 @@ namespace Api\Controllers;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Log\LoggerInterface;
-use Support\Engine\RabbitMQ;
 
-class DemoController
+// use Support\Engine\RabbitMQ;
+
+class ExampleController
 {
     private $logger;
+
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
@@ -16,17 +18,12 @@ class DemoController
 
     public function index(Request $request, Response $response, array $args = [])
     {
-        $this->logger->info('123');
+        $this->logger->info('/demo', $request->getQueryParams());
 
-        RabbitMQ::publish('123', '234', []);
+        // RabbitMQ::publish('123', '234', []);
 
-        RabbitMQ::consume('test', function ($message, $resolver) {
-            var_dump($message->body);
+        $response->getBody()->write('api demo');
 
-            $resolver->reject($message, true);
-        });
-
-        $response->getBody()->write('hello');
         return $response;
     }
 }

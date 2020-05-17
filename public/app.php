@@ -46,8 +46,7 @@ $app->get('/', function (Request $request, Response $response, $args) {
 
     return $response;
 });
-
-// $app->get('/demo', 'Api\Controllers\DemoController:index');
+$app->get('/demo', 'Api\Controllers\ExampleController:index');
 
 // 服务接口实现
 foreach ($_ENV['service'] as $k => $v) {
@@ -74,19 +73,22 @@ foreach ($_ENV['service'] as $k => $v) {
                 $method = $ref->getMethod('action');
                 $result = $method->invoke($instance);
             } catch (Support\Exception\ErrorNotice $e) {
-                $response->getBody()->write(Support\Engine\Helper::returnNoticeMsg(
-                    $e->getMessage(), $k, $e->getCode()
-                ));
+                $response->getBody()->write(
+                    Support\Engine\Helper::returnNoticeMsg(
+                        $e->getMessage(), $k, $e->getCode()
+                    )
+                );
 
                 // 程序异常日志
                 $notice = Support\Engine\ErrorFormat::noticeParse($request, $response);
-                $this->get(Psr\Log\LoggerInterface::class)->notice(json_encode($notice));
+                $this->get(Psr\Log\LoggerInterface::class)->notice('接口异常', $notice);
 
                 return $response->withHeader('Content-Type', 'application/json');
             } catch (\Exception $e) {
                 var_dump($e->getMessage(), $e->getCode());
                 exit;
             }
+
             $response->getBody()->write(Support\Engine\Helper::returnSuccessMsg($result));
             return $response->withHeader('Content-Type', 'application/json');
         }
