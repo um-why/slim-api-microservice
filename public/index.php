@@ -1,9 +1,9 @@
 <?php
 
 date_default_timezone_set('Asia/Shanghai');
-use Slim\Factory\AppFactory;
 define("ROOT_PATH", dirname(__DIR__) . DIRECTORY_SEPARATOR);
 require ROOT_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+use Slim\Factory\AppFactory;
 
 // 载入配置信息
 require_once ROOT_PATH . 'bootstrap' . DIRECTORY_SEPARATOR . 'settings.php';
