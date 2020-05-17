@@ -1,6 +1,6 @@
 {
     "name": "um-why/slim-microservice",
-    "description": "slim4 api接口项目 ",
+    "description": "slim4 api接口项目",
     "keywords": [
         "slim",
         "slim-framework",
@@ -9,6 +9,7 @@
         "microservice",
         "micro-framework",
         "api-server",
+        "medoo",
         "rabbitmq",
         "hprose"
     ],
