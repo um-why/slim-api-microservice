@@ -4,6 +4,7 @@ use Symfony\Component\Console\Application;
 return function (Application $app) {
     $app->add(new Console\Service\Creation\MakeCommand());
     $app->add(new Console\Service\Creation\MakeApiService());
+    $app->add(new Console\Service\Creation\MakeApiController());
 
     $commands = availableCommand();
     foreach ($commands as $k => $v) {
