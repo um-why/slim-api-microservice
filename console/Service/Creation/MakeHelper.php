@@ -5,7 +5,7 @@ use Exception;
 
 class MakeHelper
 {
-    public static function generateFilePath(string $className)
+    public static function generateFilePath(string $className, string $baseFileName)
     {
         $className = str_replace("\\", '/', $className);
         $className = trim($className, '/');
@@ -25,8 +25,7 @@ class MakeHelper
             $className = implode('/', $className);
         }
 
-        $fileName = ROOT_PATH . 'console' . DIRECTORY_SEPARATOR;
-        $fileName .= 'Command' . DIRECTORY_SEPARATOR;
+        $fileName = ROOT_PATH . $baseFileName . DIRECTORY_SEPARATOR;
 
         if (strpos($className, '/') !== false) {
             $path = substr($className, 0, strrpos($className, '/'));

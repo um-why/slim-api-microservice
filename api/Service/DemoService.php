@@ -1,6 +1,7 @@
 <?php
 namespace Api\Service;
 
+use Api\Service\BaseService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Support\Exception\ErrorNotice;
 

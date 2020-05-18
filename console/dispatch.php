@@ -3,6 +3,7 @@ use Symfony\Component\Console\Application;
 
 return function (Application $app) {
     $app->add(new Console\Service\Creation\MakeCommand());
+    $app->add(new Console\Service\Creation\MakeApiService());
 
     $commands = availableCommand();
     foreach ($commands as $k => $v) {
@@ -32,10 +33,14 @@ function getAllFilesClass($path = ''): array
     if ($path == '') {
         $path = ROOT_PATH . 'console' . DIRECTORY_SEPARATOR . 'Command';
     }
-    $filRs = scandir($path);
+    $fileRs = scandir($path);
     $return = array();
-    foreach ($filRs as $v) {
+    foreach ($fileRs as $v) {
         if ($v == '.' || $v == '..') {
+            continue;
+        }
+        $extension = strtolower(pathinfo($v, PATHINFO_EXTENSION));
+        if ($extension !== 'php') {
             continue;
         }
         $v = $path . DIRECTORY_SEPARATOR . $v;

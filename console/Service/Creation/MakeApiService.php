@@ -8,14 +8,14 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class MakeCommand extends Command
+class MakeApiService extends Command
 {
-    protected static $defaultName = 'make:command';
+    protected static $defaultName = 'make:apiservice';
 
     protected function configure()
     {
-        $this->setDescription('创建命令文件')
-            ->addArgument('classname', InputArgument::REQUIRED, '创建的命令文件路径名/类名');
+        $this->setDescription('创建服务接口')
+            ->addArgument('classname', InputArgument::REQUIRED, '创建的服务接口文件路径名/类名');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -23,7 +23,7 @@ class MakeCommand extends Command
         $className = $input->getArgument('classname');
 
         try {
-            list($className, $path, $fileName) = MakeHelper::generateFilePath($className, 'console' . DIRECTORY_SEPARATOR . 'Command');
+            list($className, $path, $fileName) = MakeHelper::generateFilePath($className, 'api' . DIRECTORY_SEPARATOR . 'Service');
         } catch (Exception $e) {
             $output->writeln('<error>' . $e->getMessage() . '</>');
             return 0;
@@ -47,23 +47,31 @@ class MakeCommand extends Command
     {
         $commandStr = <<<STR
 <?php
-namespace Console\Command{{path}};
+namespace Api\Service{{path}};
 
-use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Api\Service\BaseService;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Support\Exception\ErrorNotice;
 
-class {{classname}} extends Command
+class {{classname}} extends BaseService
 {
-    protected static \$defaultName = 'customize:command';
+    public static \$errorMsg = [
+        1 => 'custome notice 1',
+    ];
 
-    protected function configure()
+    public function ready(Request \$request): void
     {
-        \$this->setDescription('命令描述');
+        \$params = \$request->getQueryParams();
+        \$this->logger->info('1');
+
+        if (!isset(\$params['demo'])) {
+            throw new ErrorNotice(1);
+        }
     }
 
-    public function execute(InputInterface \$input, OutputInterface \$output)
+    public function action(): array
     {
+        return [];
     }
 }
 
