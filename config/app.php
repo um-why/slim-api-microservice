@@ -55,4 +55,8 @@ return [
             'app_secret' => isset($_ENV['AUTH_3_SECRET']) ? $_ENV['AUTH_3_SECRET'] : 3,
         ],
     ],
+
+    'hprose' => [
+        'tcp_server_uri' => isset($_ENV['HPROSE_TPC_SERVER_URI']) ? $_ENV['HPROSE_TPC_SERVER_URI'] : '',
+    ],
 ];
