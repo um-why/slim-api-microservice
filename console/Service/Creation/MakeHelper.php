@@ -9,6 +9,7 @@ class MakeHelper
     {
         $className = str_replace("\\", '/', $className);
         $className = trim($className, '/');
+        $className = ucfirst($className);
 
         if (strpos($className, '-') !== false) {
             $className = array_map(function ($v) {
