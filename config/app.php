@@ -7,6 +7,17 @@ return [
     'app_id' => isset($_ENV['APP_ID']) ? $_ENV['APP_ID'] : 0,
 
     'database' => [
+        'driver' => isset($_ENV['DB_CONNECTION']) ? $_ENV['DB_CONNECTION'] : '',
+        'host' => isset($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : '',
+        'port' => isset($_ENV['DB_PORT']) ? $_ENV['DB_PORT'] : '',
+        'database' => isset($_ENV['DB_DATABASE']) ? $_ENV['DB_DATABASE'] : '',
+        'username' => isset($_ENV['DB_USERNAME']) ? $_ENV['DB_USERNAME'] : '',
+        'password' => isset($_ENV['DB_PASSWORD']) ? $_ENV['DB_PASSWORD'] : '',
+        'charset' => isset($_ENV['DB_CHARSET']) ? $_ENV['DB_CHARSET'] : '',
+        'collation' => isset($_ENV['DB_COLLATION']) ? $_ENV['DB_COLLATION'] : '',
+        'prefix' => isset($_ENV['DB_PREFIX']) ? $_ENV['DB_PREFIX'] : '',
+    ],
+    'medoo' => [
         'database_type' => isset($_ENV['DB_CONNECTION']) ? $_ENV['DB_CONNECTION'] : '',
         'database_name' => isset($_ENV['DB_DATABASE']) ? $_ENV['DB_DATABASE'] : '',
         'server' => isset($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : '',

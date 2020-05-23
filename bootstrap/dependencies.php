@@ -1,6 +1,7 @@
 <?php
 
 use DI\ContainerBuilder;
+use Illuminate\Database\Capsule\Manager as Capsule;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
@@ -22,5 +23,10 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
+    ]);
+
+    // sillevl/slim-database-example
+    $containerBuilder->addDefinitions([
+        Capsule::class => function () {},
     ]);
 };

@@ -10,7 +10,7 @@ final class Medoo
     public static function getInstance(): MedooBasic
     {
         if (static::$instance === null) {
-            static::$instance = new MedooBasic($_ENV['database']);
+            static::$instance = new MedooBasic($_ENV['medoo']);
         }
         return static::$instance;
     }
