@@ -4,16 +4,19 @@
 date_default_timezone_set('Asia/Shanghai');
 define("ROOT_PATH", __DIR__ . DIRECTORY_SEPARATOR);
 require ROOT_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-use Symfony\Component\Console\Application;
 
 // 载入配置信息
 require_once ROOT_PATH . 'bootstrap' . DIRECTORY_SEPARATOR . 'settings.php';
 
+// 控制台实例化
+use Symfony\Component\Console\Application;
 $app = new Application('Command Management Console', '1.0');
 
+// 控制台可用服务命令 和 自动发现命令实例
 $dispatch = require ROOT_PATH . 'console' . DIRECTORY_SEPARATOR . 'dispatch.php';
 $dispatch($app);
 
+// 引入DB门面类
 if (!isset($GLOBALS['db'])) {
     $GLOBALS['db'] = new Illuminate\Database\Capsule\Manager();
     $GLOBALS['db']->addConnection($_ENV['database']);
