@@ -22,6 +22,11 @@ $app = AppFactory::create();
 // $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
+// 定义DB门面
+Illuminate\Support\Facades\DB::setFacadeApplication([
+    'db' => $app->getContainer()->get(Illuminate\Database\Capsule\Manager::class),
+]);
+
 // 通用中间件
 $app->add(new Support\Middleware\ProcessParamsSpecial());
 

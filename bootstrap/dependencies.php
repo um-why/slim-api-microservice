@@ -31,7 +31,6 @@ return function (ContainerBuilder $containerBuilder) {
             $eloquent->addConnection($_ENV['database']);
             $eloquent->setAsGlobal();
             $eloquent->bootEloquent();
-            $eloquent->setFetchMode(PDO::FETCH_ASSOC);
             return $eloquent;
         },
     ]);
