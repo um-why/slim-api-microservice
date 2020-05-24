@@ -14,4 +14,15 @@ $app = new Application('Command Management Console', '1.0');
 $dispatch = require ROOT_PATH . 'console' . DIRECTORY_SEPARATOR . 'dispatch.php';
 $dispatch($app);
 
+if (!isset($GLOBALS['db'])) {
+    $GLOBALS['db'] = new Illuminate\Database\Capsule\Manager();
+    $GLOBALS['db']->addConnection($_ENV['database']);
+    $GLOBALS['db']->setAsGlobal();
+    $GLOBALS['db']->bootEloquent();
+
+    Illuminate\Support\Facades\DB::setFacadeApplication([
+        'db' => $GLOBALS['db']->getDatabaseManager(),
+    ]);
+}
+
 $app->run();

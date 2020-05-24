@@ -24,7 +24,9 @@ $app->addErrorMiddleware(true, true, true);
 
 // 定义DB门面
 Illuminate\Support\Facades\DB::setFacadeApplication([
-    'db' => $app->getContainer()->get(Illuminate\Database\Capsule\Manager::class),
+    'db' => $app->getContainer()
+        ->get(Illuminate\Database\Capsule\Manager::class)
+        ->getDatabaseManager(),
 ]);
 
 // 通用中间件
