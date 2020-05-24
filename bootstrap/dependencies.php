@@ -25,8 +25,14 @@ return function (ContainerBuilder $containerBuilder) {
         },
     ]);
 
-    // sillevl/slim-database-example
     $containerBuilder->addDefinitions([
-        Capsule::class => function () {},
+        Capsule::class => function () {
+            $eloquent = new Capsule();
+            $eloquent->addConnection($_ENV['database']);
+            $eloquent->setAsGlobal();
+            $eloquent->bootEloquent();
+            $eloquent->setFetchMode(PDO::FETCH_ASSOC);
+            return $eloquent;
+        },
     ]);
 };
