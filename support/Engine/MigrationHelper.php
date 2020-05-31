@@ -61,4 +61,16 @@ class MigrationHelper
         $fileName = implode('', $fileName);
         return $fileName;
     }
+
+    /**
+     * 迁移表名转换为文件名
+     * @param string $tableName 迁移表名
+     * @return string 文件路径及文件名
+     */
+    public static function tablenameConvertFilename(string $tableName): string
+    {
+        $fileName = self::migrateFileBasePath() . DIRECTORY_SEPARATOR;
+        $fileName .= date('Y_m_d_His_') . $tableName . '.php';
+        return $fileName;
+    }
 }

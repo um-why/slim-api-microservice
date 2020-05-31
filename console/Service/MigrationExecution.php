@@ -28,7 +28,7 @@ class MigrationExecution extends Command
 
         $taskRs = $this->getMigrationFile();
         if (!isset($taskRs[0])) {
-            $output->writeln('<info>无需迁移</>');
+            $output->writeln('<info>无迁移</>');
             return 0;
         }
 

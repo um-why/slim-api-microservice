@@ -6,6 +6,7 @@ return function (Application $app) {
     $app->add(new Console\Service\Creation\MakeApiService());
     $app->add(new Console\Service\Creation\MakeApiController());
     $app->add(new Console\Service\Creation\MakeProcedure());
+    $app->add(new Console\Service\Creation\MakeMigration());
 
     $app->add(new Console\Service\MigrationExecution());
     $app->add(new Console\Service\MigrationRollback());
