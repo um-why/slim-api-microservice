@@ -15,7 +15,7 @@ class StartRpcServer extends Command
 
     protected function configure()
     {
-        $this->setDescription('开启由Hprose-RPC提供TCP服务');
+        $this->setDescription('开启TPC协议的RPC服务');
     }
 
     public function execute(InputInterface $input, OutputInterface $output)

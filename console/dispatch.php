@@ -7,6 +7,9 @@ return function (Application $app) {
     $app->add(new Console\Service\Creation\MakeApiController());
     $app->add(new Console\Service\Creation\MakeProcedure());
 
+    $app->add(new Console\Service\MigrationExecution());
+    $app->add(new Console\Service\MigrationRollback());
+
     $app->add(new Console\Service\StartRpcServer());
 
     $commands = availableCommand();
