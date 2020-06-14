@@ -13,6 +13,8 @@ return function (Application $app) {
 
     $app->add(new Console\Service\StartRpcServer());
 
+    $app->add(new Console\Service\CronJobScheduler());
+
     $commands = availableCommand();
     foreach ($commands as $k => $v) {
         $commands[$k] = new $v;

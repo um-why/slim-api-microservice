@@ -18,6 +18,7 @@
     "type": "project",
     "require": {
         "catfan/medoo": "^1.7",
+        "dragonmantank/cron-expression": "^3.0",
         "hprose/hprose": "^2.0",
         "illuminate/database": "^7.12",
         "monolog/monolog": "^2.0",
