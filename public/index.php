@@ -27,6 +27,7 @@ Illuminate\Support\Facades\DB::setFacadeApplication([
     'db' => $app->getContainer()
         ->get(Illuminate\Database\Capsule\Manager::class)
         ->getDatabaseManager(),
+    'date' => new Illuminate\Support\DateFactory,
 ]);
 
 // 通用中间件
