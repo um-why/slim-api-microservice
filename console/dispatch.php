@@ -49,14 +49,15 @@ function getAllFilesClass($path = ''): array
         if ($v == '.' || $v == '..') {
             continue;
         }
-        $extension = strtolower(pathinfo($v, PATHINFO_EXTENSION));
-        if ($extension !== 'php') {
-            continue;
-        }
         $v = $path . DIRECTORY_SEPARATOR . $v;
         if (is_dir($v)) {
             $return = array_merge($return, getAllFilesClass($v));
         } else {
+            $extension = strtolower(pathinfo($v, PATHINFO_EXTENSION));
+            if ($extension !== 'php') {
+                continue;
+            }
+
             $class = str_replace(ROOT_PATH . 'console', 'Console', $v);
             $class = str_replace('.php', '', $class);
             $return[] = str_replace('/', '\\', $class);
